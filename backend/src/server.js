@@ -1,18 +1,18 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import productsRoutes from './routes/products.routes.js';
+import authRoutes from './routes/auth.routes.js';
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Middlewares: funciones que procesan CADA petición antes de llegar a las rutas.
-app.use(cors());           // Permite que Angular (otro puerto/origen) llame a esta API.
-app.use(express.json());   // Convierte el body de las peticiones (JSON) en un objeto JS (req.body).
+app.use(cors());
+app.use(express.json());
 
-// Montamos las rutas de productos bajo el prefijo /api/products
 app.use('/api/products', productsRoutes);
+app.use('/api/auth', authRoutes);
 
-// Ruta simple para verificar que el servidor vive
 app.get('/', (req, res) => {
   res.send('API de Mobiliaria funcionando 🪑');
 });
