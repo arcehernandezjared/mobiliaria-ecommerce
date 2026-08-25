@@ -1,0 +1,21 @@
+<section class="catalog">
+  <h1>Catálogo de Muebles</h1>
+
+  <div class="filters">
+    <button (click)="filterByCategory()">Todos</button>
+    <button (click)="filterByCategory('Salas')">Salas</button>
+    <button (click)="filterByCategory('Comedores')">Comedores</button>
+    <button (click)="filterByCategory('Recámaras')">Recámaras</button>
+    <button (click)="filterByCategory('Oficina')">Oficina</button>
+  </div>
+
+  <div class="product-grid">
+    <!-- @for reemplaza al viejo *ngFor. "track product.id" ayuda a Angular
+         a identificar cada elemento por su id (mejor rendimiento al actualizar la lista) -->
+    @for (product of products$ | async; track product.id) {
+      <app-product-card [product]="product" />
+    } @empty {
+      <p>No hay productos en esta categoría.</p>
+    }
+  </div>
+</section>

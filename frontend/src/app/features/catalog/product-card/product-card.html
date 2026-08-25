@@ -1,0 +1,15 @@
+
+<article class="product-card">
+  <!-- [src] y [alt] son "property binding": el valor entre [] es una expresión de TS/JS,
+       no un texto literal -->
+  <img [src]="product.imageUrl" [alt]="product.name" />
+
+  <h3>{{ product.name }}</h3>
+  <p class="category">{{ product.category }}</p>
+
+  <!-- el pipe "number" formatea el número (1.0-0 = sin decimales) -->
+  <p class="price">${{ product.price | number:'1.0-0' }} MXN</p>
+
+  <!-- routerLink con un arreglo arma la ruta dinámica: /producto/3, /producto/7, etc. -->
+  <a [routerLink]="['/producto', product.id]" class="btn">Ver detalle</a>
+</article>
