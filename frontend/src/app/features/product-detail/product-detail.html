@@ -1,0 +1,31 @@
+
+<!-- "as p" crea una variable local "p" solo dentro de este bloque,
+     así no repetimos product() todo el tiempo y evitamos llamarlo de más -->
+@if (product(); as p) {
+  <section class="detail">
+    <img [src]="p.imageUrl" [alt]="p.name" />
+
+    <div class="info">
+      <a routerLink="/" class="back-link">&larr; Volver al catálogo</a>
+
+      <h1>{{ p.name }}</h1>
+      <p class="category">{{ p.category }}</p>
+      <p class="description">{{ p.description }}</p>
+      <p class="price">${{ p.price | number:'1.0-0' }} MXN</p>
+      <p class="stock">Disponibles: {{ p.stock }}</p>
+
+      <div class="quantity-selector">
+        <button (click)="decreaseQuantity()">-</button>
+        <span>{{ quantity() }}</span>
+        <button (click)="increaseQuantity()">+</button>
+      </div>
+
+      <!-- [disabled] deshabilita el botón cuando no hay stock -->
+      <button class="btn-add" (click)="addToCart()" [disabled]="p.stock === 0">
+        Agregar al carrito
+      </button>
+    </div>
+  </section>
+} @else {
+  <p class="loading">Cargando producto...</p>
+}
