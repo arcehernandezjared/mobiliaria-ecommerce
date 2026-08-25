@@ -1,0 +1,15 @@
+# dependencias
+node_modules/
+
+# build de Angular
+frontend/dist/
+
+# variables de entorno / secretos
+backend/.env
+
+# base de datos local (son datos de prueba, no hace falta versionarlos)
+backend/src/data/db.json
+
+# archivos de sistema/editor
+.DS_Store
+*.log
