@@ -1,0 +1,50 @@
+<section class="cart-page">
+  <h1>Tu Carrito</h1>
+
+  @if (cartService.items().length === 0) {
+    <p>Tu carrito está vacío. <a routerLink="/">Ir al catálogo</a></p>
+  } @else {
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of cartService.items(); track item.product.id) {
+          <tr>
+            <td class="product-cell">
+              <img [src]="item.product.imageUrl" [alt]="item.product.name" />
+              {{ item.product.name }}
+            </td>
+            <td>${{ item.product.price | number:'1.0-0' }}</td>
+            <td>
+              <!-- #qty: variable de referencia al <input>, para leer qty.value abajo -->
+              <input
+                #qty
+                type="number"
+                min="1"
+                [max]="item.product.stock"
+                [value]="item.quantity"
+                (change)="onQuantityChange(item.product.id, qty.value)"
+              />
+            </td>
+            <td>${{ item.product.price * item.quantity | number:'1.0-0' }}</td>
+            <td>
+              <button (click)="cartService.removeItem(item.product.id)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="cart-summary">
+      <p>Total: <strong>${{ cartService.totalPrice() | number:'1.0-0' }} MXN</strong></p>
+      <a routerLink="/checkout" class="btn-checkout">Proceder al pago</a>
+    </div>
+  }
+</section>

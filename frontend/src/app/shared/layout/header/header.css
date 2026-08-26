@@ -40,3 +40,15 @@ text-decoration: underline;
 
 
 }
+.cart-link {
+  position: relative;
+}
+
+.badge {
+  background-color: #c0392b;
+  color: white;
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.75rem;
+  margin-left: 0.3rem;
+}

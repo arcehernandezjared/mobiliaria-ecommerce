@@ -2,7 +2,12 @@
     <a routerLink="/" class="logo">Mobiliaria casa</a>
     <nav>
          <a routerLink="/">Catálogo</a>
-        <a routerLink="/cart">Carrito</a>
+        <a routerLink="/carrito" class="cart-link">
+          Carrito
+          @if (cartService.totalItems() > 0) {
+            <span class="badge">{{ cartService.totalItems() }}</span>
+          }
+        </a>
         <a routerLink="/login">Iniciar sesión</a>
     </nav>
 
